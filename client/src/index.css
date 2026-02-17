@@ -1,5 +1,30 @@
 /* frontend/src/index.css */
 
+/* DESIGN TOKENS */
+:root {
+  --primary: #3498db;
+  --primary-hover: #2980b9;
+  --secondary: #2c3e50;
+  --bg: #f0f4f8;
+  --text: #333;
+  --card-bg: #ffffff;
+  --border: #bdc3c7;
+  --success: #2ecc71;
+  --danger: #e74c3c;
+  --warning: #f1c40f;
+  --shadow: rgba(0,0,0,0.08);
+  --radius: 10px;
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #f1f1f1;
+  --card-bg: #1e1e1e;
+  --border: #444;
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -18,6 +43,21 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
+
+
+/* CARD SYSTEM */
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px var(--shadow);
+  margin-bottom: 20px;
+}
+
+/* FLEX UTILITIES */
+.flex { display: flex; }
+.center { justify-content: center; align-items: center; }
+.space-between { justify-content: space-between; }
 
 h1,
 h2 {
@@ -46,6 +86,16 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* TYPOGRAPHY SCALE */
+.text-sm { font-size: 0.9rem; }
+.text-md { font-size: 1rem; }
+.text-lg { font-size: 1.2rem; }
+.text-xl { font-size: 1.6rem; }
+.text-xxl { font-size: 2rem; }
+
+.font-bold { font-weight: bold; }
+.font-light { font-weight: 300; }
+
 /* Game list */
 ul {
   list-style: none;
@@ -61,6 +111,22 @@ a {
   text-decoration: none;
   font-weight: 500;
 }
+
+/* NAVBAR */
+.navbar {
+  background: var(--card-bg);
+  padding: 14px 20px;
+  box-shadow: 0 4px 12px var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links a {
+  margin: 0 12px;
+  font-weight: 500;
+}
+
 
 a:hover {
   text-decoration: underline;
