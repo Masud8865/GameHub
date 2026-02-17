@@ -1,15 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import GameCard from './GameCard';
 
 const GameList = () => {
+    const games = [
+        {
+            name: "Tic-Tac-Toe",
+            path: "/games/tic-tac-toe",
+            description: "Classic 3x3 strategy game. Get three in a row to win!",
+            icon: "⭕"
+        },
+        {
+            name: "Rock-Paper-Scissors",
+            path: "/games/rock-paper-scissors",
+            description: "Challenge the computer in this timeless hand game.",
+            icon: "✊"
+        }
+    ];
+
     return (
         <div>
             <h2>Available Games</h2>
-            <ul>
-                <li><Link to="/games/tic-tac-toe">Tic-Tac-Toe</Link></li>
-                <li><Link to="/games/rock-paper-scissors">Rock-Paper-Scissors</Link></li>
-                {/* Add new games here, e.g., <li><Link to="/games/new-game">New Game</Link></li> */}
-            </ul>
+            <div className="game-grid">
+                {games.map(game => (
+                    <GameCard key={game.path} {...game} />
+                ))}
+            </div>
         </div>
     );
 };

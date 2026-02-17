@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './components/Home';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
@@ -9,6 +11,7 @@ import RockPaperScissors from './components/Games/RockPaperScissors';
 function App() {
   return (
     <Router>
+      <Header />
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -18,6 +21,7 @@ function App() {
           <Route path="/games/rock-paper-scissors" element={<RockPaperScissors />} />
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }
