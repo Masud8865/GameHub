@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import './Home.css';
+import HomeGameCard from './HomeGameCard';
 
 const games = [
   {
@@ -192,22 +193,9 @@ const Home = () => {
 
         <div className="home-game-grid">
           {games.map((game) => (
-            <motion.article
-              key={game.path}
-              className={`home-game-card tone-${game.tone}`}
-              variants={itemVariants}
-              whileHover={{ y: -10, rotateX: 4, transition: { duration: 0.25 } }}
-            >
-              <div className="home-game-card-top">
-                <span className="home-game-token">{game.token}</span>
-                <span className="home-game-label">{game.label}</span>
-              </div>
-              <h3>{game.name}</h3>
-              <p>{game.description}</p>
-              <Link to={game.path} className="home-card-link">
-                Launch match
-              </Link>
-            </motion.article>
+            <motion.div key={game.path} variants={itemVariants}>
+              <HomeGameCard {...game} />
+            </motion.div>
           ))}
         </div>
       </motion.section>
