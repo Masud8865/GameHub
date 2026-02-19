@@ -2,6 +2,54 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './TicTacToe.css';
 
+// Pure functions moved outside component to avoid dependency issues
+const calculateWinner = (squares) => {
+    const lines = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+        [0, 4, 8], [2, 4, 6] // diagonals
+    ];
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return { winner: squares[a], line: lines[i] };
+        }
+    }
+    return null;
+};
+
+const minimax = (board, depth, isMaximizing) => {
+    const result = calculateWinner(board);
+    
+    if (result && result.winner === 'O') return 10 - depth;
+    if (result && result.winner === 'X') return depth - 10;
+    if (!board.includes(null)) return 0;
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === null) {
+                board[i] = 'O';
+                let score = minimax(board, depth + 1, false);
+                board[i] = null;
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === null) {
+                board[i] = 'X';
+                let score = minimax(board, depth + 1, true);
+                board[i] = null;
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+};
+
 const TicTacToe = () => {
     // Game State
     const [board, setBoard] = useState(Array(9).fill(null));
@@ -29,8 +77,8 @@ const TicTacToe = () => {
         localStorage.setItem('tictactoe_scores', JSON.stringify(scores));
     }, [scores]);
 
-    // Sound effects
-    const playSound = (type) => {
+    // Sound effects - wrapped in useCallback to be used in other useCallbacks/useEffects
+    const playSound = useCallback((type) => {
         if (!soundEnabled) return;
         const audio = new Audio();
         switch(type) {
@@ -48,58 +96,9 @@ const TicTacToe = () => {
         }
         audio.volume = 0.3;
         audio.play().catch(e => console.log('Audio play failed:', e));
-    };
+    }, [soundEnabled]);
 
-    // Check for winner
-    const calculateWinner = (squares) => {
-        const lines = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-            [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-            [0, 4, 8], [2, 4, 6] // diagonals
-        ];
-        for (let i = 0; i < lines.length; i++) {
-            const [a, b, c] = lines[i];
-            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                return { winner: squares[a], line: lines[i] };
-            }
-        }
-        return null;
-    };
-
-    // Minimax Algorithm for Hard AI
-    const minimax = (board, depth, isMaximizing) => {
-        const result = calculateWinner(board);
-        
-        if (result && result.winner === 'O') return 10 - depth;
-        if (result && result.winner === 'X') return depth - 10;
-        if (!board.includes(null)) return 0;
-
-        if (isMaximizing) {
-            let bestScore = -Infinity;
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === null) {
-                    board[i] = 'O';
-                    let score = minimax(board, depth + 1, false);
-                    board[i] = null;
-                    bestScore = Math.max(score, bestScore);
-                }
-            }
-            return bestScore;
-        } else {
-            let bestScore = Infinity;
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === null) {
-                    board[i] = 'X';
-                    let score = minimax(board, depth + 1, true);
-                    board[i] = null;
-                    bestScore = Math.min(score, bestScore);
-                }
-            }
-            return bestScore;
-        }
-    };
-
-    // AI Move Logic
+    // Update scores
     const getAIMove = useCallback((currentBoard) => {
         const availableMoves = currentBoard
             .map((cell, idx) => cell === null ? idx : null)
@@ -213,9 +212,8 @@ const TicTacToe = () => {
 
             return () => clearTimeout(timer);
         }
-    }, [isXNext, winner, board, gameMode, getAIMove, isGameStarted]);
+    }, [isXNext, winner, board, gameMode, getAIMove, isGameStarted, playSound, saveScoreToServer]);
 
-    // Update scores
     const updateScores = (result) => {
         setScores(prev => {
             if (result === 'X') return { ...prev, playerX: prev.playerX + 1 };
@@ -225,8 +223,8 @@ const TicTacToe = () => {
         });
     };
 
-    // Save score to server
-    const saveScoreToServer = async (result) => {
+    // Save score to server - wrapped in useCallback to be used in other useCallbacks/useEffects
+    const saveScoreToServer = useCallback(async (result) => {
         const token = localStorage.getItem('token');
         if (!token) return;
         try {
@@ -238,7 +236,7 @@ const TicTacToe = () => {
         } catch (err) {
             console.error('Failed to save score:', err);
         }
-    };
+    }, [API_BASE]);
 
     // Reset game
     const resetGame = () => {
