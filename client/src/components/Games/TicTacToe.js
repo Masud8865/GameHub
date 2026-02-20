@@ -182,6 +182,21 @@ const TicTacToe = () => {
         }
     };
 
+    // Save score to server - wrapped in useCallback to be used in other useCallbacks/useEffects
+    const saveScoreToServer = useCallback(async (result) => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        try {
+            const score = result === 'X' ? 1 : result === 'O' ? 0 : 0.5;
+            await axios.post(`${API_BASE}/api/scores`, 
+                { game: 'TicTacToe', score }, 
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+        } catch (err) {
+            console.error('Failed to save score:', err);
+        }
+    }, [API_BASE]);
+
     // AI Move Effect
     useEffect(() => {
         if (gameMode === 'pvai' && !isXNext && !winner && isGameStarted) {
@@ -222,21 +237,6 @@ const TicTacToe = () => {
             return prev;
         });
     };
-
-    // Save score to server - wrapped in useCallback to be used in other useCallbacks/useEffects
-    const saveScoreToServer = useCallback(async (result) => {
-        const token = localStorage.getItem('token');
-        if (!token) return;
-        try {
-            const score = result === 'X' ? 1 : result === 'O' ? 0 : 0.5;
-            await axios.post(`${API_BASE}/api/scores`, 
-                { game: 'TicTacToe', score }, 
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-        } catch (err) {
-            console.error('Failed to save score:', err);
-        }
-    }, [API_BASE]);
 
     // Reset game
     const resetGame = () => {
