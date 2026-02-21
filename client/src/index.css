@@ -14,8 +14,14 @@
   --success: #2ecc71;
   --danger: #e74c3c;
   --warning: #f1c40f;
-  --shadow: rgba(0,0,0,0.08);
+  --shadow: rgba(0, 0, 0, 0.08);
   --radius: 10px;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* DARK MODE */
@@ -33,19 +39,22 @@
   box-sizing: border-box;
 }
 
+
 body {
   font-family: 'Outfit', 'Trebuchet MS', 'Segoe UI', sans-serif;
   background-color: #d7e0e8;
   color: #333;
   line-height: 1.6;
+  margin: 0;
 }
 
 .App {
+  flex: 1;                
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  width: 100%;
 }
-
 
 /* CARD SYSTEM */
 .card {
@@ -57,9 +66,18 @@ body {
 }
 
 /* FLEX UTILITIES */
-.flex { display: flex; }
-.center { justify-content: center; align-items: center; }
-.space-between { justify-content: space-between; }
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
 
 h1,
 h2 {
@@ -89,14 +107,33 @@ button:disabled {
 }
 
 /* TYPOGRAPHY SCALE */
-.text-sm { font-size: 0.9rem; }
-.text-md { font-size: 1rem; }
-.text-lg { font-size: 1.2rem; }
-.text-xl { font-size: 1.6rem; }
-.text-xxl { font-size: 2rem; }
+.text-sm {
+  font-size: 0.9rem;
+}
 
-.font-bold { font-weight: bold; }
-.font-light { font-weight: 300; }
+.text-md {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.2rem;
+}
+
+.text-xl {
+  font-size: 1.6rem;
+}
+
+.text-xxl {
+  font-size: 2rem;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-light {
+  font-weight: 300;
+}
 
 /* Game list */
 ul {
@@ -196,7 +233,8 @@ input {
 .footer {
   background: var(--card-bg);
   padding: 30px 20px;
-  margin-top: 60px;
+  margin-top: auto;
+  width: 100%;
   border-top: 1px solid var(--border);
   box-shadow: 0 -4px 12px var(--shadow);
 }
@@ -250,7 +288,7 @@ input {
   margin-bottom: 20px;
   color: white;
   font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero p {
@@ -362,7 +400,7 @@ input {
   opacity: 0.72;
 }
 
-.game-card > * {
+.game-card>* {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.32s ease;
@@ -407,9 +445,10 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .game-card,
   .game-card:hover,
-  .game-card > *,
+  .game-card>*,
   .game-card::before,
   .game-card::after {
     transition: none;
