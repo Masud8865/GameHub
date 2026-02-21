@@ -63,13 +63,24 @@ Frontend:
 
 backend/.env
 
-    MONGO_URI=mongodb://127.0.0.1:27017/gamehub
+    cd backend
+    cp .env.example .env
+    
+Edit the `.env` file with your connection strings and secrets:
 
+    MONGO_URI=mongodb://username:password@localhost:27017/dbname
     # MongoDB Atlas example:
-    # MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/gamehub?retryWrites=true&w=majority
+    # MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/dbname?retryWrites=true&w=majority
 
-    JWT_SECRET=super-secret-key-please-change-this-1234567890abcdef
+    JWT_SECRET=your_jwt_secret_key_here
     PORT=5000
+
+    ACCESS_TOKEN_SECRET=your_access_token_secret_key_here
+    ACCESS_TOKEN_EXPIRY=1d
+    REFRESH_TOKEN_SECRET=your_refresh_token_secret_key_here
+    REFRESH_TOKEN_EXPIRY=10d
+
+or, Copy `.env.example` in `.env`
 
 frontend/.env (optional)
 
