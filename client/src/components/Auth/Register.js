@@ -7,9 +7,11 @@ import {
   FaGoogle,
   FaGithub,
 } from "react-icons/fa";
+import { useAuth } from "../../context/AuthContext";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const API_BASE =
     process.env.REACT_APP_API_BASE || "http://localhost:5000";
 
@@ -43,9 +45,19 @@ const Register = () => {
         username: form.username,
         email: form.email,
         password: form.password,
-      });
+      }).then(async () => {
+        // login after registration
+        const res = await axios.post(`${API_BASE}/api/user/login`, {
+          username: form.email,
+          password: form.password,
+        }, {
+          withCredentials: true
+        });
 
-      navigate("/login");
+        login(res.data.data.user);
+
+        navigate("/");
+      })
     } catch (err) {
       setError(
         err.response?.data?.message || "Registration failed"
