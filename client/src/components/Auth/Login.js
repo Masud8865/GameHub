@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const API_BASE =
     process.env.REACT_APP_API_BASE || "http://localhost:5000";
@@ -37,16 +39,14 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${API_BASE}/api/auth/login`, {
-        identifier: form.identifier.trim(),
+      const res = await axios.post(`${API_BASE}/api/user/login`, {
+        username: form.identifier.trim(),
         password: form.password,
+      }, {
+        withCredentials: true
       });
 
-      const storage = form.remember
-        ? localStorage
-        : sessionStorage;
-
-      storage.setItem("token", res.data.token);
+      login(res.data.data.user);
 
       navigate("/");
     } catch (err) {
