@@ -80,6 +80,15 @@ Edit the `.env` file with your connection strings and secrets:
     REFRESH_TOKEN_SECRET=your_refresh_token_secret_key_here
     REFRESH_TOKEN_EXPIRY=10d
 
+    # For Email Services (Password reset OTP email, etc)
+    # Mail configurations
+    SMTP_HOST=smtp.example.com
+    SMTP_PORT=587
+    SMTP_USER=user@example.com
+    SMTP_PASS="password"
+    SUPPORT_EMAIL=support@gamehub.com
+
+
 or, Copy `.env.example` in `.env`
 
 frontend/.env (optional)
