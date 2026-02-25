@@ -8,6 +8,7 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import TicTacToe from './components/Games/TicTacToe';
 import RockPaperScissors from './components/Games/RockPaperScissors';
+import SlidingPuzzle from './components/Games/SlidingPuzzle';       // ← ADD THIS
 import About from './components/Info/About';
 import PrivacyPolicy from './components/Info/PrivacyPolicy';
 import TermsOfService from './components/Info/TermsOfService';
@@ -24,6 +25,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/games/tic-tac-toe" element={<TicTacToe />} />
             <Route path="/games/rock-paper-scissors" element={<RockPaperScissors />} />
+            <Route path="/games/sliding-puzzle" element={<SlidingPuzzle />} />  {/* ← ADD THIS */}
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
