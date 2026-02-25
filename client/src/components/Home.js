@@ -21,7 +21,7 @@ const games = [
     description: 'A timeless duel where every prediction can flip the match.',
     tone: 'sunset',
   },
-   {                                                                            // ← ADD THIS BLOCK
+   {                                                                            
     name: 'Sliding Puzzle',
     path: '/games/sliding-puzzle',
     label: 'Brain Teaser',
