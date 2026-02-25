@@ -11,6 +11,8 @@ import RockPaperScissors from './components/Games/RockPaperScissors';
 import About from './components/Info/About';
 import PrivacyPolicy from './components/Info/PrivacyPolicy';
 import TermsOfService from './components/Info/TermsOfService';
+import NumberGuessingGame from './components/Games/NumberGuessingGame';
+
 
 function App() {
   return (
@@ -24,6 +26,10 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/games/tic-tac-toe" element={<TicTacToe />} />
             <Route path="/games/rock-paper-scissors" element={<RockPaperScissors />} />
+            <Route
+              path="/games/number-guessing"
+              element={<NumberGuessingGame />}
+            />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
