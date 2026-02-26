@@ -74,11 +74,26 @@ Edit the `.env` file with your connection strings and secrets:
 
     JWT_SECRET=your_jwt_secret_key_here
     PORT=5000
+    CLIENT_URL=http://localhost:3000
 
     ACCESS_TOKEN_SECRET=your_access_token_secret_key_here
     ACCESS_TOKEN_EXPIRY=1d
     REFRESH_TOKEN_SECRET=your_refresh_token_secret_key_here
     REFRESH_TOKEN_EXPIRY=10d
+
+    # For Email Services (Password reset OTP email, etc)
+    # Mail configurations
+    SMTP_HOST=smtp.example.com
+    SMTP_PORT=587
+    SMTP_USER=user@example.com
+    SMTP_PASS="password"
+    SUPPORT_EMAIL=support@gamehub.com
+
+    # Google OAuth
+    GOOGLE_CLIENT_ID=your_google_client_id_here
+    GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+    GOOGLE_REDIRECT_URI=http://localhost:5000/api/oauth/google/callback
+
 
 or, Copy `.env.example` in `.env`
 

@@ -67,7 +67,7 @@ const Register = () => {
 
   // OAuth redirects
   const handleGoogleRegister = () => {
-    window.location.href = `${API_BASE}/api/auth/google`;
+    window.location.href = `${API_BASE}/api/oauth/google`;
   };
 
   const handleGithubRegister = () => {

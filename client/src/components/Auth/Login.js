@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
@@ -56,6 +56,10 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${API_BASE}/api/oauth/google`;
   };
 
   return (
@@ -128,6 +132,18 @@ const Login = () => {
           {loading ? "Logging in..." : "Login"}
         </button>
 
+        {/* Divider */}
+        <div style={styles.divider}>OR</div>
+
+        {/* Google Login Button */}
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          style={styles.googleBtn}
+        >
+          <FaGoogle /> Login with Google
+        </button>
+
         <p style={styles.registerText}>
           Don't have an account?{" "}
           <Link to="/register" style={styles.link}>
@@ -195,6 +211,26 @@ const styles = {
     borderRadius: "6px",
     cursor: "pointer",
     fontWeight: "600",
+  },
+  divider: {
+    textAlign: "center",
+    margin: "15px 0",
+    color: "#888",
+    fontSize: "14px",
+  },
+  googleBtn: {
+    width: "100%",
+    padding: "12px",
+    background: "#db4437",
+    color: "#fff",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "600",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
   },
   link: {
     color: "#3b82b6",
