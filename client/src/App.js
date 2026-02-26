@@ -6,7 +6,6 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
-import ForgotPassword from './components/Auth/ForgotPassword';
 import TicTacToe from './components/Games/TicTacToe';
 import RockPaperScissors from './components/Games/RockPaperScissors';
 import About from './components/Info/About';
@@ -25,7 +24,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/games/tic-tac-toe" element={<TicTacToe />} />
             <Route path="/games/rock-paper-scissors" element={<RockPaperScissors />} />
             <Route
