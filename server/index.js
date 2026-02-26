@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoutes = require('./routes/user.routes');
+const oauthRoutes = require('./routes/oauth.routes');
 const scoreRoutes = require('./routes/scores');
 const cookieParser = require("cookie-parser");
 const path = require("path");
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.log(err));
 
 app.use('/api/user', userRoutes);
+app.use('/api/oauth', oauthRoutes);
 app.use('/api/scores', scoreRoutes);
 
 const PORT = process.env.PORT || 5000;
