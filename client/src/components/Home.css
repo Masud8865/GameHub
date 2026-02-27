@@ -309,6 +309,7 @@
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   perspective: 1800px;
   perspective-origin: 50% 42%;
+  align-items: stretch;
 }
 
 .home-game-card {
@@ -436,6 +437,7 @@
   margin: 0;
   color: #34516b;
   transform: translateZ(30px);
+  flex-grow: 1;
 }
 
 .home-card-link {
