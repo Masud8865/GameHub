@@ -21,6 +21,15 @@ const games = [
     description: 'A timeless duel where every prediction can flip the match.',
     tone: 'sunset',
   },
+  
+   {                                                                            
+    name: 'Sliding Puzzle',
+    path: '/games/sliding-puzzle',
+    label: 'Brain Teaser',
+    token: '🧩',
+    description: 'Slide tiles into order — sounds easy, gets tricky fast.',
+    tone: 'teal',
+  },
   {
     name: 'Number Guessing',
     path: '/games/number-guessing',

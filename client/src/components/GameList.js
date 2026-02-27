@@ -15,11 +15,17 @@ const GameList = () => {
             description: "Challenge the computer in this timeless hand game.",
             icon: "✊"
         },
-         {
+        {
             name: "Number Guessing",
             path: "/games/number-guessing",
             description: "Guess the secret number between 1–100 with smart hints.",
             icon: "🎯"
+        },
+        {
+            name: 'Sliding Puzzle',
+            path: '/games/sliding-puzzle',
+            description: 'Slide tiles into order — sounds easy, gets tricky fast.',
+            icon: '🧩',
         }
     ];
 
