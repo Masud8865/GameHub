@@ -1,0 +1,183 @@
+/*  Page Background  */
+.number-game-container {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+}
+
+/*  Card  */
+.number-game-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  padding: 38px;
+  border-radius: 18px;
+  text-align: center;
+  width: 100%;
+  max-width: 440px;
+
+  border: 1px solid rgba(255,255,255,0.6);
+
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.08),
+    0 4px 12px rgba(79,70,229,0.08);
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.number-game-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 55px rgba(0,0,0,0.12),
+    0 8px 20px rgba(79,70,229,0.15);
+}
+
+/*  Title  */
+.number-game-card h2 {
+  margin-bottom: 8px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #111827;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+/*  Input  */
+.number-game-card input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 16px;
+  margin-bottom: 16px;
+  outline: none;
+  transition: all 0.25s ease;
+  background: #fff;
+}
+
+.number-game-card input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.18);
+  transform: scale(1.01);
+}
+
+/*  Guess Button  */
+.guess-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.guess-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(79,70,229,0.35);
+}
+
+.guess-btn:active {
+  transform: scale(0.97);
+}
+
+/*  Message  */
+.message {
+  margin-top: 20px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: all 0.3s ease;
+}
+
+/* Hint Colors */
+.message.high {
+  color: #ef4444;
+}
+
+.message.low {
+  color: #2563eb;
+}
+
+.message.correct {
+  color: #16a34a;
+  animation: pop 0.35s ease;
+}
+
+/*  Attempts  */
+.attempts {
+  margin-top: 12px;
+  color: #4b5563;
+  font-size: 15px;
+}
+
+/*  Restart Button  */
+.restart-btn {
+  margin-top: 22px;
+  width: 100%;
+  padding: 12px;
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.restart-btn:hover {
+  background: #000;
+  transform: translateY(-2px);
+}
+
+/*  Success Animation  */
+@keyframes pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/*  Card Feedback Glow  */
+
+.number-game-card.card-high {
+  box-shadow:
+    0 20px 60px rgba(239,68,68,0.25),
+    0 0 25px rgba(239,68,68,0.25);
+}
+
+.number-game-card.card-low {
+  box-shadow:
+    0 20px 60px rgba(37,99,235,0.25),
+    0 0 25px rgba(37,99,235,0.25);
+}
+
+.number-game-card.card-correct {
+  box-shadow:
+    0 25px 70px rgba(22,163,74,0.35),
+    0 0 35px rgba(22,163,74,0.45);
+  transform: translateY(-6px) scale(1.02);
+}
+
+/*  Responsive  */
+@media (max-width: 480px) {
+  .number-game-card {
+    padding: 26px;
+    border-radius: 14px;
+  }
+}

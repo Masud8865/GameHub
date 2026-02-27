@@ -21,18 +21,26 @@ const games = [
     description: 'A timeless duel where every prediction can flip the match.',
     tone: 'sunset',
   },
-   {                                                                            
+  {
     name: 'Sliding Puzzle',
     path: '/games/sliding-puzzle',
     label: 'Brain Teaser',
     token: '🧩',
     description: 'Slide tiles into order — sounds easy, gets tricky fast.',
+    tone: 'teal',
+  },
+  {
+    name: 'Number Guessing',
+    path: '/games/number-guessing',
+    label: 'Mind Challenge',
+    token: '100',
+    description: 'Find the hidden number with smart hints and beat your best attempts.',
     tone: 'emerald',
   },
 ];
 
 const stats = [
-  { value: '2', label: 'Classic games live' },
+  { value: '3', label: 'Classic games live' },
   { value: '<10s', label: 'From click to match' },
   { value: '24/7', label: 'Always available' },
 ];
