@@ -321,8 +321,10 @@
   --hover-glow-rgb: 14, 165, 233;
   position: relative;
   overflow: hidden;
-  display: grid;
+   display: flex;
+  flex-direction: column;
   gap: 12px;
+  height: 100%;
   padding: 22px;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.38);
@@ -437,7 +439,7 @@
 }
 
 .home-card-link {
-  margin-top: 8px;
+  margin-top: auto;
   display: inline-flex;
   width: fit-content;
   align-items: center;

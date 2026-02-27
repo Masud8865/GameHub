@@ -12,7 +12,7 @@ import About from './components/Info/About';
 import PrivacyPolicy from './components/Info/PrivacyPolicy';
 import TermsOfService from './components/Info/TermsOfService';
 import NumberGuessingGame from './components/Games/NumberGuessingGame';
-
+import SnakeGame from "./components/Games/SnakeGame";
 
 function App() {
   return (
@@ -30,6 +30,7 @@ function App() {
               path="/games/number-guessing"
               element={<NumberGuessingGame />}
             />
+            <Route path="/games/snake" element={<SnakeGame />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
