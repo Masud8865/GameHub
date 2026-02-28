@@ -22,6 +22,12 @@ const GameList = () => {
             icon: "🎯"
         },
         {
+            name: "Snake",
+            path: "/games/snake",
+            description: "Classic arcade snake. Grow longer and avoid crashing!",
+            icon: "🐍"
+        },
+        {
             name: 'Sliding Puzzle',
             path: '/games/sliding-puzzle',
             description: 'Slide tiles into order — sounds easy, gets tricky fast.',

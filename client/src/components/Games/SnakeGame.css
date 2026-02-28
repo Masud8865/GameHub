@@ -1,0 +1,31 @@
+.snake-container {
+  text-align: center;
+  padding: 30px;
+}
+
+canvas {
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.snake-info {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.game-over {
+  color: #ef4444;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #111827;
+  color: white;
+  cursor: pointer;
+}

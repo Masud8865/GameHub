@@ -38,6 +38,14 @@ const games = [
     description: 'Find the hidden number with smart hints and beat your best attempts.',
     tone: 'emerald',
   },
+  {
+  name: 'Snake',
+  path: '/games/snake',
+  label: 'Arcade Classic',
+  token: '🐍',
+  description: 'Grow your snake, collect food, and avoid crashing.',
+  tone: 'emerald',
+},
 ];
 
 const stats = [
