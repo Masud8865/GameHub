@@ -39,7 +39,14 @@ const games = [
     tone: 'emerald',
   },
   {
-<<<<<<< HEAD
+    name: 'Snake',
+    path: '/games/snake',
+    label: 'Arcade Classic',
+    token: '🐍',
+    description: 'Grow your snake, collect food, and avoid crashing.',
+    tone: 'emerald',
+  },
+    {
     name: 'Sudoku',
     path: '/games/sudoku',
     label: 'Logic Puzzle',
@@ -47,15 +54,6 @@ const games = [
     description: 'Fill every row, column, and box with 1–9. Pure logic, no guessing.',
     tone: 'cobalt',
   },
-=======
-  name: 'Snake',
-  path: '/games/snake',
-  label: 'Arcade Classic',
-  token: '🐍',
-  description: 'Grow your snake, collect food, and avoid crashing.',
-  tone: 'emerald',
-},
->>>>>>> upstream/main
 ];
 
 const stats = [
