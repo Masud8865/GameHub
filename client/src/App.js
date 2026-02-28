@@ -8,11 +8,13 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import TicTacToe from './components/Games/TicTacToe';
 import RockPaperScissors from './components/Games/RockPaperScissors';
-import SlidingPuzzle from './components/Games/SlidingPuzzle';       
+import SlidingPuzzle from './components/Games/SlidingPuzzle';
 import About from './components/Info/About';
 import PrivacyPolicy from './components/Info/PrivacyPolicy';
 import TermsOfService from './components/Info/TermsOfService';
 import NumberGuessingGame from './components/Games/NumberGuessingGame';
+import Sudoku from './components/Games/Sudoku';
+
 import SnakeGame from "./components/Games/SnakeGame";
 
 function App() {
@@ -27,7 +29,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/games/tic-tac-toe" element={<TicTacToe />} />
             <Route path="/games/rock-paper-scissors" element={<RockPaperScissors />} />
-            <Route path="/games/sliding-puzzle" element={<SlidingPuzzle />} /> 
+            <Route path="/games/sliding-puzzle" element={<SlidingPuzzle />} />
+            <Route path="/games/sudoku" element={<Sudoku />} />
             <Route
               path="/games/number-guessing"
               element={<NumberGuessingGame />}

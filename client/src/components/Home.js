@@ -21,8 +21,8 @@ const games = [
     description: 'A timeless duel where every prediction can flip the match.',
     tone: 'sunset',
   },
-  
-   {                                                                            
+
+  {
     name: 'Sliding Puzzle',
     path: '/games/sliding-puzzle',
     label: 'Brain Teaser',
@@ -39,13 +39,21 @@ const games = [
     tone: 'emerald',
   },
   {
-  name: 'Snake',
-  path: '/games/snake',
-  label: 'Arcade Classic',
-  token: '🐍',
-  description: 'Grow your snake, collect food, and avoid crashing.',
-  tone: 'emerald',
-},
+    name: 'Snake',
+    path: '/games/snake',
+    label: 'Arcade Classic',
+    token: '🐍',
+    description: 'Grow your snake, collect food, and avoid crashing.',
+    tone: 'emerald',
+  },
+    {
+    name: 'Sudoku',
+    path: '/games/sudoku',
+    label: 'Logic Puzzle',
+    token: '9×9',
+    description: 'Fill every row, column, and box with 1–9. Pure logic, no guessing.',
+    tone: 'cobalt',
+  },
 ];
 
 const stats = [
