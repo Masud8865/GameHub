@@ -26,6 +26,12 @@ const GameList = () => {
             path: '/games/sliding-puzzle',
             description: 'Slide tiles into order — sounds easy, gets tricky fast.',
             icon: '🧩',
+        },
+        {
+            name: 'Sudoku',
+            path: '/games/sudoku',
+            description: 'Fill the 9×9 grid so every row, column, and box has 1–9.',
+            icon: '🔢',
         }
     ];
 

@@ -21,8 +21,8 @@ const games = [
     description: 'A timeless duel where every prediction can flip the match.',
     tone: 'sunset',
   },
-  
-   {                                                                            
+
+  {
     name: 'Sliding Puzzle',
     path: '/games/sliding-puzzle',
     label: 'Brain Teaser',
@@ -37,6 +37,14 @@ const games = [
     token: '100',
     description: 'Find the hidden number with smart hints and beat your best attempts.',
     tone: 'emerald',
+  },
+  {
+    name: 'Sudoku',
+    path: '/games/sudoku',
+    label: 'Logic Puzzle',
+    token: '9×9',
+    description: 'Fill every row, column, and box with 1–9. Pure logic, no guessing.',
+    tone: 'cobalt',
   },
 ];
 
