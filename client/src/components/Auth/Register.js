@@ -71,7 +71,7 @@ const Register = () => {
   };
 
   const handleGithubRegister = () => {
-    window.location.href = `${API_BASE}/api/auth/github`;
+    window.location.href = `${API_BASE}/api/oauth/github`;
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle, FaGithub } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
@@ -60,6 +60,10 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     window.location.href = `${API_BASE}/api/oauth/google`;
+  };
+
+  const handleGithubLogin = () => {
+    window.location.href = `${API_BASE}/api/oauth/github`;
   };
 
   return (
@@ -142,6 +146,14 @@ const Login = () => {
           style={styles.googleBtn}
         >
           <FaGoogle /> Login with Google
+        </button>
+
+        <button
+          type="button"
+          onClick={handleGithubLogin}
+          style={{ ...styles.googleBtn, background: "#24292e", marginTop: "10px" }}
+        >
+          <FaGithub /> Login with GitHub
         </button>
 
         <p style={styles.registerText}>

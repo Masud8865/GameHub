@@ -104,7 +104,107 @@ const googleAuthCallback = asyncHandler(async (req, res) => {
     }
 });
 
+const githubAuthInit = asyncHandler(async (req, res) => {
+    const clientId = process.env.GITHUB_CLIENT_ID;
+    const redirectUri = process.env.GITHUB_REDIRECT_URI;
+
+    if (!clientId || !redirectUri) {
+        throw new ApiError(500, "GitHub OAuth credentials are not properly configured");
+    }
+
+    const scope = "read:user user:email";
+
+    const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+
+    return res.redirect(url);
+});
+
+const githubAuthCallback = asyncHandler(async (req, res) => {
+    const { code } = req.query;
+
+    if (!code) {
+        return res.redirect(`${process.env.CLIENT_URL}/login?error=GitHub authorization failed`);
+    }
+
+    try {
+        const tokenResponse = await axios.post("https://github.com/login/oauth/access_token", {
+            client_id: process.env.GITHUB_CLIENT_ID,
+            client_secret: process.env.GITHUB_CLIENT_SECRET,
+            code,
+            redirect_uri: process.env.GITHUB_REDIRECT_URI,
+        }, {
+            headers: {
+                Accept: "application/json"
+            }
+        });
+
+        const { access_token } = tokenResponse.data;
+
+        if (!access_token) {
+            throw new Error("Failed to obtain access token from GitHub");
+        }
+
+        const userResponse = await axios.get("https://api.github.com/user", {
+            headers: { Authorization: `Bearer ${access_token}` },
+        });
+
+        const emailsResponse = await axios.get("https://api.github.com/user/emails", {
+            headers: { Authorization: `Bearer ${access_token}` },
+        });
+
+        const githubUser = userResponse.data;
+        const emails = emailsResponse.data;
+
+        const primaryEmailObj = emails.find(e => e.primary) || emails[0];
+        if (!primaryEmailObj || !primaryEmailObj.email) {
+            throw new Error("No primary email found for GitHub user");
+        }
+
+        const email = primaryEmailObj.email;
+
+        let user = await User.findOne({ email });
+
+        if (!user) {
+            let baseUsername = githubUser.login || email.split('@')[0].toLowerCase();
+            let username = baseUsername;
+            let count = 1;
+            while (await User.findOne({ username })) {
+                username = `${baseUsername}${count}`;
+                count++;
+            }
+
+            const randomPassword = crypto.randomBytes(16).toString('hex');
+
+            user = await User.create({
+                email,
+                username,
+                password: randomPassword,
+            });
+        }
+
+        const { accessToken, refreshToken } = await generateAccessAndAccessTokens(
+            user._id
+        );
+
+        const options = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+        };
+
+        return res
+            .status(200)
+            .cookie("accessToken", accessToken, options)
+            .cookie("refreshToken", refreshToken, options)
+            .redirect(`${process.env.CLIENT_URL}/`); // Redirect home after successful login
+    } catch (error) {
+        console.error("GitHub OAuth Error:", error.response?.data || error.message);
+        return res.redirect(`${process.env.CLIENT_URL}/login?error=GitHub authorization failed`);
+    }
+});
+
 module.exports = {
     googleAuthInit,
-    googleAuthCallback
+    googleAuthCallback,
+    githubAuthInit,
+    githubAuthCallback
 };
