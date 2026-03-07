@@ -1,117 +1,132 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./RockPaperScissors.css";
 
-const RockPaperScissors = () => {
-    const [playerChoice, setPlayerChoice] = useState(null);
-    const [aiChoice, setAiChoice] = useState(null);
-    const [result, setResult] = useState(null);
-    const [playerPoints, setPlayerPoints] = useState(0);
-    const [aiPoints, setAiPoints] = useState(0);
+const choices = [
+  { name: "rock", icon: "✊" },
+  { name: "paper", icon: "✋" },
+  { name: "scissors", icon: "✌" }
+];
 
-    const choices = ['Rock', 'Paper', 'Scissors'];
-    const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:5000';
-    const maxPoints = 5; // first to 5 points wins
+export default function RockPaperScissors() {
+  const [playerChoice, setPlayerChoice] = useState(null);
+  const [aiChoice, setAiChoice] = useState(null);
+  const [result, setResult] = useState("");
+  const [thinking, setThinking] = useState(false);
 
-    const play = (choice) => {
-        if (playerPoints >= maxPoints || aiPoints >= maxPoints) return;
+  const [playerScore, setPlayerScore] = useState(0);
+  const [aiScore, setAiScore] = useState(0);
 
-        const ai = choices[Math.floor(Math.random() * 3)];
-        setPlayerChoice(choice);
-        setAiChoice(ai);
-        determineWinner(choice, ai);
-    };
+  const getAIChoice = () => {
+    const rand = Math.floor(Math.random() * choices.length);
+    return choices[rand];
+  };
 
-    const determineWinner = (player, ai) => {
-        if (player === ai) {
-            setResult('Draw!');
-            return;
-        }
+  const determineWinner = (player, ai) => {
+    if (player.name === ai.name) return "draw";
 
-        if (
-            (player === 'Rock' && ai === 'Scissors') ||
-            (player === 'Paper' && ai === 'Rock') ||
-            (player === 'Scissors' && ai === 'Paper')
-        ) {
-            setResult('You Win this round!');
-            setPlayerPoints(prev => prev + 1);
-            saveScore(1); // send score to backend
-        } else {
-            setResult('AI Wins this round!');
-            setAiPoints(prev => prev + 1);
-            saveScore(0); // send score to backend
-        }
-    };
+    if (
+      (player.name === "rock" && ai.name === "scissors") ||
+      (player.name === "paper" && ai.name === "rock") ||
+      (player.name === "scissors" && ai.name === "paper")
+    ) {
+      return "win";
+    }
 
-    const saveScore = async (score) => {
-        const token = localStorage.getItem('token');
-        if (!token) return;
-        try {
-            await axios.post(
-                `${API_BASE}/api/scores`,
-                { game: 'RockPaperScissors', score },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    return "lose";
+  };
 
-    const resetGame = () => {
-        setPlayerChoice(null);
-        setAiChoice(null);
-        setResult(null);
-        setPlayerPoints(0);
-        setAiPoints(0);
-    };
+  const play = (choice) => {
+    setPlayerChoice(choice);
+    setThinking(true);
+    setResult("");
+    setAiChoice(null);
 
-    const isGameOver = playerPoints >= maxPoints || aiPoints >= maxPoints;
+    setTimeout(() => {
+      const ai = getAIChoice();
+      setAiChoice(ai);
 
-    return (
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <h2>🎮 Rock-Paper-Scissors (Point-Based)</h2>
+      const outcome = determineWinner(choice, ai);
 
-            <div style={{ margin: '20px' }}>
-                {choices.map(choice => (
-                    <button
-                        key={choice}
-                        onClick={() => play(choice)}
-                        disabled={isGameOver}
-                        style={{ margin: '0 10px', padding: '10px 20px', fontSize: '16px' }}
-                    >
-                        {choice}
-                    </button>
-                ))}
-            </div>
+      if (outcome === "win") {
+        setPlayerScore((s) => s + 1);
+        setResult("You Win!");
+      } else if (outcome === "lose") {
+        setAiScore((s) => s + 1);
+        setResult("You Lose!");
+      } else {
+        setResult("Draw!");
+      }
 
-            {playerChoice && aiChoice && (
-                <p>
-                    You chose: <b>{playerChoice}</b> | AI chose: <b>{aiChoice}</b>
-                </p>
-            )}
+      setThinking(false);
+    }, 900);
+  };
 
-            {result && <h3>{result}</h3>}
+  const resetGame = () => {
+    setPlayerScore(0);
+    setAiScore(0);
+    setPlayerChoice(null);
+    setAiChoice(null);
+    setResult("");
+  };
 
-            <p>
-                Score → You: <b>{playerPoints}</b> | AI: <b>{aiPoints}</b>
-            </p>
+  const resultClass =
+    result === "You Win!"
+      ? "win"
+      : result === "You Lose!"
+      ? "lose"
+      : result === "Draw!"
+      ? "draw"
+      : "";
 
-            {isGameOver && (
-                <div>
-                    <h2>
-                        {playerPoints > aiPoints
-                            ? '🎉 You Won the Game!'
-                            : '💀 AI Won the Game!'}
-                    </h2>
-                    <button
-                        onClick={resetGame}
-                        style={{ padding: '10px 20px', fontSize: '16px', marginTop: '20px' }}
-                    >
-                        Reset Game
-                    </button>
-                </div>
-            )}
+  return (
+    <div className="card rps-container">
+
+      <h2 className="rps-title">🎮 Rock Paper Scissors</h2>
+
+      <div className="rps-arena">
+
+        <div className="rps-side">
+          <span className="rps-label">YOU</span>
+          <div className="rps-choice player">
+            {playerChoice ? playerChoice.icon : "❓"}
+          </div>
         </div>
-    );
-};
 
-export default RockPaperScissors;
+        <div className="rps-vs">VS</div>
+
+        <div className="rps-side">
+          <span className="rps-label">AI</span>
+          <div className={`rps-choice ai ${thinking ? "thinking" : ""}`}>
+            {thinking ? "🤖" : aiChoice ? aiChoice.icon : "❓"}
+          </div>
+        </div>
+
+      </div>
+
+      <div className="rps-buttons">
+        {choices.map((c) => (
+          <button key={c.name} onClick={() => play(c)}>
+            <span className="btn-icon">{c.icon}</span>
+            {c.name}
+          </button>
+        ))}
+      </div>
+
+      {result && (
+        <div className={`rps-result ${resultClass}`}>
+          {result}
+        </div>
+      )}
+
+      <div className="rps-scoreboard">
+        <div>🏆 You: {playerScore}</div>
+        <div>🤖 AI: {aiScore}</div>
+      </div>
+
+      <button className="rps-reset" onClick={resetGame}>
+        Reset Game
+      </button>
+
+    </div>
+  );
+}
