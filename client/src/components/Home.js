@@ -19,7 +19,7 @@ const games = [
     label: 'Reaction Duel',
     token: 'RPS',
     description: 'A timeless duel where every prediction can flip the match.',
-    tone: 'sunset',
+    tone: 'cobalt',
   },
 
   {
