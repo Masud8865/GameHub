@@ -54,6 +54,14 @@ const games = [
     description: 'Fill every row, column, and box with 1–9. Pure logic, no guessing.',
     tone: 'cobalt',
   },
+  {
+  name: 'Memory Card Flip',
+  path: '/games/memory-card',
+  label: 'Memory Challenge',
+  token: '🃏',
+  description: 'Flip cards and match pairs — test your memory under the clock.',
+  tone: 'teal',
+},
 ];
 
 const stats = [
