@@ -76,7 +76,7 @@ const Card = React.memo(({ card, onClick, disabled }) => {
 const MemoryCardGame = () => {
   const [difficulty, setDifficulty] = useState('easy');
   const [deck, setDeck]             = useState(() => buildDeck(CARD_SETS.easy));
-  const [flipped, setFlipped]       = useState([]);   // ids of face-up cards (max 2)
+  const [_flipped, setFlipped] = useState([]);   // ids of face-up cards (max 2)
   const [locked, setLocked]         = useState(false);
   const [moves, setMoves]           = useState(0);
   const [matches, setMatches]       = useState(0);
