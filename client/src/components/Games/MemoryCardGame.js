@@ -4,9 +4,9 @@ import './MemoryCardGame.css';
 
 // ── Card symbol sets per difficulty ──────────────────────────────────────────
 const CARD_SETS = {
-  easy:   ['🍎','🍊','🍋','🍇','🍓','🫐'],
-  medium: ['🍎','🍊','🍋','🍇','🍓','🫐','🥝','🍑'],
-  hard:   ['🍎','🍊','🍋','🍇','🍓','🫐','🥝','🍑','🍒','🍍','🥭','🍌'],
+  easy: ['🍎', '🍊', '🍋', '🍇', '🍓', '🫐'],
+  medium: ['🍎', '🍊', '🍋', '🍇', '🍓', '🫐', '🥝', '🍑'],
+  hard: ['🍎', '🍊', '🍋', '🍇', '🍓', '🫐', '🥝', '🍑', '🍒', '🍍', '🥭', '🍌'],
 };
 
 const GRID_COLS = { easy: 3, medium: 4, hard: 6 };
@@ -75,15 +75,15 @@ const Card = React.memo(({ card, onClick, disabled }) => {
 // ── Main component ────────────────────────────────────────────────────────────
 const MemoryCardGame = () => {
   const [difficulty, setDifficulty] = useState('easy');
-  const [deck, setDeck]             = useState(() => buildDeck(CARD_SETS.easy));
-  const [_flipped, setFlipped] = useState([]);   // ids of face-up cards (max 2)
-  const [locked, setLocked]         = useState(false);
-  const [moves, setMoves]           = useState(0);
-  const [matches, setMatches]       = useState(0);
-  const [time, setTime]             = useState(0);
-  const [running, setRunning]       = useState(false);
+  const [deck, setDeck] = useState(() => buildDeck(CARD_SETS.easy));
+  const [, setFlipped] = useState([]);  // ids of face-up cards (max 2)
+  const [locked, setLocked] = useState(false);
+  const [moves, setMoves] = useState(0);
+  const [matches, setMatches] = useState(0);
+  const [time, setTime] = useState(0);
+  const [running, setRunning] = useState(false);
   const [bestScores, setBestScores] = useState({ easy: null, medium: null, hard: null });
-  const [gameWon, setGameWon]       = useState(false);
+  const [gameWon, setGameWon] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const timerRef = useRef(null);
 
@@ -108,7 +108,7 @@ const MemoryCardGame = () => {
 
       setBestScores((prev) => {
         const prev_score = prev[difficulty];
-        const new_score  = { moves, time };
+        const new_score = { moves, time };
         if (
           !prev_score ||
           moves < prev_score.moves ||
@@ -148,9 +148,9 @@ const MemoryCardGame = () => {
         const [firstId] = prev;
         setTimeout(() => {
           setDeck((d) => {
-            const firstCard  = d.find((c) => c.id === firstId);
+            const firstCard = d.find((c) => c.id === firstId);
             const secondCard = d.find((c) => c.id === id);
-            const isMatch    = firstCard?.symbol === secondCard?.symbol;
+            const isMatch = firstCard?.symbol === secondCard?.symbol;
 
             if (isMatch) {
               setMatches((m) => m + 1);
@@ -197,10 +197,10 @@ const MemoryCardGame = () => {
   // ── Helpers ──────────────────────────────────────────────────────────────
   const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
-  const totalPairs     = CARD_SETS[difficulty].length;
-  const progressPct    = Math.round((matches / totalPairs) * 100);
-  const best           = bestScores[difficulty];
-  const gridCols       = GRID_COLS[difficulty];
+  const totalPairs = CARD_SETS[difficulty].length;
+  const progressPct = Math.round((matches / totalPairs) * 100);
+  const best = bestScores[difficulty];
+  const gridCols = GRID_COLS[difficulty];
 
   // ── Render ───────────────────────────────────────────────────────────────
   return (
